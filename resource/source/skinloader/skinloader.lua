@@ -30,6 +30,7 @@ function inv_replica.SetImage(self, item)
     _SetImage(self, item)
 end
 
+--[[
 if _G.TheNet:GetIsClient() then
     require("characterutil")
     local _SetSkinnedOvalPortraitTexture = SetSkinnedOvalPortraitTexture
@@ -40,6 +41,7 @@ if _G.TheNet:GetIsClient() then
         return _SetSkinnedOvalPortraitTexture(image_widget, character, skin)
     end
 end
+]] 
 local function RegisterNoneSkin(skin_id, base_prefab)
     if not PREFAB_SKINS[base_prefab] then PREFAB_SKINS[base_prefab] = {} end
     if not PREFAB_SKINS_IDS[base_prefab] then PREFAB_SKINS_IDS[base_prefab] = {} end
@@ -360,7 +362,7 @@ end
 local _SpawnPrefab = SpawnPrefab
 function SpawnPrefab(name, skin, ...)
     local ent = _SpawnPrefab(name, skin, ...)
-    if ent and skin and skin:start_with_that_prefix() then
+    if ent and skin and type(skin) == "string" and skin:start_with_that_prefix() then  -- 此处新增类型判断
         name = name:gsub("_placer", "")
         ApplySkin(ent, name, skin)
     end

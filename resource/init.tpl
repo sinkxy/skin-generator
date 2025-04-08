@@ -72,7 +72,7 @@ function abigail_flower_init_fn (inst, build_name)
     if not TheWorld.ismastersim then
         return
     end
-    if inst.flower_skin_id and inst.skin_id then
+    if inst.flower_skin_id and inst.skin_id then    -- 此处新增条件
         inst.flower_skin_id:set(inst.skin_id)
     end
     inst.AnimState:SetSkin(build_name, "abigail_flower_rework")
